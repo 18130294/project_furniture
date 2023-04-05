@@ -34,7 +34,7 @@ import com.example.furniture.repositories.SubCategoryRepository;
 			modelMap.addAttribute("subCategories",subCategories);
 
 			
-			return "index";
+			return "login";
 		}
 
 
