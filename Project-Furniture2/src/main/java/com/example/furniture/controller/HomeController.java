@@ -29,7 +29,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 	@Controller
-	@RequestMapping(path = "home")
+	@RequestMapping("home")
 	//http:localhost:8080/home
 	public class HomeController {
 		@Autowired //inject ="categoryRepository"==>kỹ thuật Dependency injection
@@ -42,6 +42,7 @@ import jakarta.servlet.http.HttpSession;
 		
 		@RequestMapping(value = "",method = RequestMethod.GET)
 		//return name of jsp file
+		
 		public String getAllCategoriesAndProduct(ModelMap modelMap,HttpServletRequest request) {
 			//ModelMap là để gửi dữ liệu từ database lên
 			List<Category> categories = categoryRepository.findAll();
@@ -70,4 +71,5 @@ import jakarta.servlet.http.HttpSession;
 			
 			return "index";
 		}
+		
 }

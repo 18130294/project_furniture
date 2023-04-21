@@ -11,7 +11,7 @@
 <%@page import="com.example.furniture.model.Category"%>
 <html lang="en">
 <head>
-	<title>Home</title>
+	<title>Product By Subcategory</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
@@ -68,12 +68,7 @@
 	<%
 	List<Category> categories =(List<Category>)request.getAttribute("categories");
 	List<SubCategory> subCategory =(List<SubCategory>)request.getAttribute("subCategories");
-/* 	List<Product> product =(List<Product>)request.getAttribute("product");
- */	
-	Page<Product> product =(Page<Product>)request.getAttribute("product");//Phân trang
-	
-	long endPage = (long)request.getAttribute("endPage");
-	int indexActive = (int)request.getAttribute("indexActive");
+	List<Product> product =(List<Product>)request.getAttribute("product");
 
 	Product detailPro = (Product)request.getAttribute("detailPro");
 	Cart cart = (Cart)session.getAttribute("cart");
@@ -415,10 +410,10 @@
 </div>
 			
 			<!-- Load more -->
-				<div class="pagination">
+				<%-- <div class="pagination">
 			    <% for (int i=1; i<= endPage;i++) {%>
 			  <a class="<%=indexActive==i?"active":""%>" href="home?indexPage=<%=i%>"><%=i%></a>
-			 <%} %>
+			 <%} %> --%>
 </div>
 
 		</div>

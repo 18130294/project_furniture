@@ -79,7 +79,7 @@
 				<nav class="limiter-menu-desktop container">
 					
 					<!-- Logo desktop -->		
-					<a href="#" class="logo">
+					<a href="/home" class="logo">
 						<img src="images/icons/logo-01.png" alt="IMG-LOGO">
 					</a>
 
@@ -96,7 +96,7 @@
 								<ul class="sub-menu">
 								<%for(SubCategory sub: subCategory) {%>
 								<%if(sub.getIdcategories().equalsIgnoreCase(c.getIdCategories())){%>
-									<li><a href=""><%=sub.getNameSubcategories()%></a></li>
+									<li><a href="productsubCate?idSubCate=<%=sub.getIdSubcategory()%>"><%=sub.getNameSubcategories()%></a></li>
 									<%} %>
 									<%} %>
 						
@@ -183,7 +183,7 @@
 	</header>
 
 	<!-- Cart --------------------------------------------------------------------------------------------------------------------------->
-	<%-- <div class="wrap-header-cart js-panel-cart">
+	<div class="wrap-header-cart js-panel-cart">
 		<div class="s-full js-hide-cart"></div>
 
 		<div class="header-cart flex-col-l p-l-65 p-r-25">
@@ -227,7 +227,7 @@
 					<%} %>
 
 					<div class="header-cart-buttons flex-w w-full">
-						<a href="" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
+						<a href="DisplayCart" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
 							View Cart
 						</a>
 
@@ -240,7 +240,6 @@
 		</div>
 	</div>
 		
- --%>
 	<!-- Shoping Cart -->
 	<form class="bg0 p-t-75 p-b-85">
 		<div class="container">
@@ -309,7 +308,7 @@
 
 							<div class="size-209 p-r-18 p-r-0-sm w-full-ssm">
 								<p class="stext-111 cl6 p-t-2">
-								<input type="text" placeholder="Vui lòng nhập địa chỉ giao hàng" width="400px">
+								<input style="border: 1px solid black" type="text" placeholder="Vui lòng nhập địa chỉ giao hàng" width="400px">
 		
 								</p>
 								

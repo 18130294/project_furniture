@@ -3,6 +3,7 @@ package com.example.furniture.model;
 
 
 import org.springframework.stereotype.Controller
+
 ;
 
 import jakarta.persistence.Column;

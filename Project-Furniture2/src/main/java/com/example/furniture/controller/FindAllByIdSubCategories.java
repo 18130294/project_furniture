@@ -5,6 +5,9 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +19,8 @@ import com.example.furniture.model.SubCategory;
 import com.example.furniture.repositories.CategoryRepository;
 import com.example.furniture.repositories.ProductRepository;
 import com.example.furniture.repositories.SubCategoryRepository;
+
+import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
 public class FindAllByIdSubCategories {
@@ -39,6 +44,6 @@ public class FindAllByIdSubCategories {
 		System.out.println("Sanppppppppppp"+p.toString());
 		}
 		modelMap.addAttribute("product",product);
-		return "index";
+		return "productBySubcate";
 	}
 }

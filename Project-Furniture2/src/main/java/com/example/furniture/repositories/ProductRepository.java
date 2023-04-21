@@ -18,6 +18,7 @@ public interface ProductRepository  extends JpaRepository<Product, Integer> {
 //		@Query("select*from product where idSubcategory =: idSubCate")
 	//@Param("idSubCate") String idSubCate
 		public List<Product> findAllByIdSubCategories(String idSubcate);
+
 	
 		
 
