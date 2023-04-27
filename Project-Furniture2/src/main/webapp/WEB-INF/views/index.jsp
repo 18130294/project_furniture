@@ -6,6 +6,8 @@
 <%@page import="com.example.furniture.model.SubCategory"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+	
  <!DOCTYPE html>
  <%@page import="java.util.List"%>
 <%@page import="com.example.furniture.model.Category"%>
@@ -96,12 +98,26 @@
 					</div>
 					
 					<div class="right-top-bar flex-w h-full">
+					<c:if test="${sessionScope.account !=null && sessionScope.account.isAdmin==0}">
 						
-						<a href="#" class="flex-c-m trans-04 p-lr-25">
-							My Account
+						<a href="" class="flex-c-m trans-04 p-lr-25">
+							${sessionScope.account.nameUser}
+						</a>
+</c:if>
+						  <c:if test="${sessionScope.account ==null}">
+                 
+						<a href="show_account_page" class="flex-c-m trans-04 p-lr-25">
+							Đăng nhập/ Đăng ký
+						</a>
+                  </c:if>
+                  <c:if test="${sessionScope.account !=null}">
+                 
+						<a href="logout" class="flex-c-m trans-04 p-lr-25">
+							Đăng xuất
 						</a>
 
-						
+					
+                  </c:if>
 					</div>
 				</div>
 			</div>
@@ -117,10 +133,7 @@
 					<!-- Menu desktop -->
 					<div class="menu-desktop">
 						<ul class="main-menu">
-							<li class="active-menu">
-								<a href="/home">Home</a>
-								
-							</li>
+	
 			<%for(Category c: categories) {%>
 							<li>
 								<a href=""><%=c.getNameCategories()%></a>
@@ -140,10 +153,14 @@
 
 					<!-- Icon header -->
 					<div class="wrap-icon-header flex-w flex-r-m">
-						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-modal-search">
-							<i class="zmdi zmdi-search"></i>
+					<form action="">
+					 	<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11">
+					 	<div style="border: 0.5px solid black;border-radius: 10px;background-color: #4CAF50;">
+					<input type="text" style="border-bottom-left-radius:10px;border-top-left-radius:10px ;width: 200px;display: inline;">
+					<button type="submit"><i class="zmdi zmdi-search"></i></button>
+					</div>
 						</div>
-
+			</form>
 						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="<%=cart.countItem()%>">
 							<i class="zmdi zmdi-shopping-cart"></i>
 						</div>
@@ -182,15 +199,37 @@
 		<!-- Menu Mobile -->
 		<div class="menu-mobile">
 			<ul class="topbar-mobile">
+		<c:if test="${sessionScope.account !=null && sessionScope.account.isAdmin==0}">
+			
 				<li>
 					<div class="right-top-bar flex-w h-full">
-						
 						<a href="#" class="flex-c-m p-lr-10 trans-04">
-							My Account
+							${sessionScope.account.nameUser}
 						</a>
 
 						</div>
 				</li>
+				</c:if>
+                  <c:if test="${sessionScope.account ==null}">
+                  <li>
+					<div class="right-top-bar flex-w h-full">
+						<a href="show_account_page" class="flex-c-m p-lr-10 trans-04">
+							Đăng nhập
+						</a>
+
+						</div>
+				</li>
+                  </c:if>
+                  <c:if test="${sessionScope.account !=null}">
+                  <li>
+					<div class="right-top-bar flex-w h-full">
+						<a href="show_account_page" class="flex-c-m p-lr-10 trans-04">
+							Đăng xuất
+						</a>
+
+						</div>
+				</li>
+                  </c:if>
 			</ul>
 
 			
@@ -276,74 +315,74 @@
 	<section class="section-slide">
 		<div class="wrap-slick1">
 			<div class="slick1">
-				<div class="item-slick1" style="background-image: url(images/slide-01.jpg);">
+				<div class="item-slick1" style="background-image: url(images/poster/poster1.jpg);">
 					<div class="container h-full">
 						<div class="flex-col-l-m h-full p-t-100 p-b-30 respon5">
 							<div class="layer-slick1 animated visible-false" data-appear="fadeInDown" data-delay="0">
 								<span class="ltext-101 cl2 respon2">
-									Women Collection 2018
+									Nội thất chất lượng hàng đầu
 								</span>
 							</div>
 								
 							<div class="layer-slick1 animated visible-false" data-appear="fadeInUp" data-delay="800">
 								<h2 class="ltext-201 cl2 p-t-19 p-b-43 respon1">
-									NEW SEASON
+									NEW MODEL
 								</h2>
 							</div>
 								
-							<div class="layer-slick1 animated visible-false" data-appear="zoomIn" data-delay="1600">
+							<!-- <div class="layer-slick1 animated visible-false" data-appear="zoomIn" data-delay="1600">
 								<a href="product.html" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">
 									Shop Now
 								</a>
-							</div>
+							</div> -->
 						</div>
 					</div>
 				</div>
 
-				<div class="item-slick1" style="background-image: url(images/slide-02.jpg);">
+				<div class="item-slick1" style="background-image: url(images/poster/poster2.jpg);">
 					<div class="container h-full">
 						<div class="flex-col-l-m h-full p-t-100 p-b-30 respon5">
 							<div class="layer-slick1 animated visible-false" data-appear="rollIn" data-delay="0">
 								<span class="ltext-101 cl2 respon2">
-									Men New-Season
+									Đẹp đến từng centimet
 								</span>
 							</div>
 								
 							<div class="layer-slick1 animated visible-false" data-appear="lightSpeedIn" data-delay="800">
 								<h2 class="ltext-201 cl2 p-t-19 p-b-43 respon1">
-									Jackets & Coats
+									Nhanh tay lẹ chân lựa chọn nào!
 								</h2>
 							</div>
 								
-							<div class="layer-slick1 animated visible-false" data-appear="slideInUp" data-delay="1600">
+							<!-- <div class="layer-slick1 animated visible-false" data-appear="slideInUp" data-delay="1600">
 								<a href="product.html" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">
 									Shop Now
 								</a>
-							</div>
+							</div> -->
 						</div>
 					</div>
 				</div>
 
-				<div class="item-slick1" style="background-image: url(images/slide-03.jpg);">
+				<div class="item-slick1" style="background-image: url(images/poster/poster3.jpg);">
 					<div class="container h-full">
 						<div class="flex-col-l-m h-full p-t-100 p-b-30 respon5">
 							<div class="layer-slick1 animated visible-false" data-appear="rotateInDownLeft" data-delay="0">
 								<span class="ltext-101 cl2 respon2">
-									Men Collection 2018
+								Mua ngay đi nào!
 								</span>
 							</div>
 								
 							<div class="layer-slick1 animated visible-false" data-appear="rotateInUpRight" data-delay="800">
 								<h2 class="ltext-201 cl2 p-t-19 p-b-43 respon1">
-									New arrivals
+									Nhà thêm xinh, tinh thần thêm thoải mái
 								</h2>
 							</div>
 								
-							<div class="layer-slick1 animated visible-false" data-appear="rotateIn" data-delay="1600">
+							<!-- <div class="layer-slick1 animated visible-false" data-appear="rotateIn" data-delay="1600">
 								<a href="product.html" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">
 									Shop Now
 								</a>
-							</div>
+							</div> -->
 						</div>
 					</div>
 				</div>

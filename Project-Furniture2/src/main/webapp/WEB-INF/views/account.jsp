@@ -37,6 +37,32 @@
 	<link rel="stylesheet" type="text/css" href="css/util.css">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 <!--===============================================================================================-->
+<!-- Font awesome -->
+    <link href="css/font-awesome.css" rel="stylesheet">
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.css" rel="stylesheet">   
+    <!-- SmartMenus jQuery Bootstrap Addon CSS -->
+    <link href="css/jquery.smartmenus.bootstrap.css" rel="stylesheet">
+    <!-- Product view slider -->
+    <link rel="stylesheet" type="text/css" href="css/jquery.simpleLens.css">    
+    <!-- slick slider -->
+    <link rel="stylesheet" type="text/css" href="css/slick.css">
+    <!-- price picker slider -->
+    <link rel="stylesheet" type="text/css" href="css/nouislider.css">
+    <!-- Theme color -->
+    <link id="switcher" href="css/theme-color/default-theme.css" rel="stylesheet">
+    <!-- <link id="switcher" href="css/theme-color/bridge-theme.css" rel="stylesheet"> -->
+    <!-- Top Slider CSS -->
+    <link href="css/sequence-theme.modern-slide-in.css" rel="stylesheet" media="all">
+
+    <!-- Main style sheet -->
+    <link href="css/style.css" rel="stylesheet">    
+
+    <!-- Google Font -->
+    <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+    
+
 </head>
 <body class="animsition">
 	<%
@@ -66,9 +92,6 @@
 					
 					<div class="right-top-bar flex-w h-full">
 						
-						<a href="#" class="flex-c-m trans-04 p-lr-25">
-							My Account
-						</a>
 
 						
 					</div>
@@ -114,7 +137,6 @@
 					</div>
 						</div>
 			</form>
-                       
 
 						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="<%=cart.countItem()%>">
 							<i class="zmdi zmdi-shopping-cart"></i>
@@ -157,10 +179,6 @@
 				<li>
 					<div class="right-top-bar flex-w h-full">
 						
-						<a href="show_account_page" class="flex-c-m p-lr-10 trans-04">
-							My Account
-						</a>
-
 						</div>
 				</li>
 			</ul>
@@ -242,115 +260,61 @@
 			</div>
 		</div>
 	</div>
-		
-	<!-- Shoping Cart -->
-	<form class="bg0 p-t-75 p-b-85">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-10 col-xl-7 m-lr-auto m-b-50">
-					<div class="m-l-25 m-r--38 m-lr-0-xl">
-						<div class="wrap-table-shopping-cart">
-							<table class="table-shopping-cart">
-								<tr class="table_head">
-									<th class="column-1">Product</th>
-									<th class="column-2"></th>
-									<th class="column-3">Price</th>
-									<th class="column-4">Quantity</th>
-									<th class="column-5">Total</th>
-								</tr>
-				       <%for(Map.Entry<Product,Integer> entry:list.entrySet()){%>
-
-								<tr class="table_row">
-									<td class="column-1">
-										<div class="how-itemcart1">
-											<img src="images/img/<%=entry.getKey().getImages()%>" alt="IMG">
-										</div>
-									</td>
-									<td class="column-2"><%=entry.getKey().getNameProduct()%></td>
-									<td class="column-3"><%=entry.getKey().getPrice()%></td>
-									<td class="column-4">
-										<div class="wrap-num-product flex-w m-l-auto m-r-0">
-											<div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
-											<a class="fs-16 zmdi zmdi-minus" href="Cart?command=subItem&product_id=<%=entry.getKey().getIdProduct()%>&cartID=<%=System.currentTimeMillis()%>"></a>
-											</div>
-
-											<input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product1" value="<%=entry.getValue()%>">
-
-											<div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
-												<a class="fs-16 zmdi zmdi-plus" href="Cart?command=addItem&product_id=<%=entry.getKey().getIdProduct()%>&cartID=<%=System.currentTimeMillis()%>"></a>
-											</div>
-										</div>
-									</td>
-									<td class="column-5"><%=entry.getKey().getPrice()*entry.getValue()%></td>
-								</tr>
-								<%} %>
-
-							
-							</table>
-						</div>
-
-						<div class="flex-w flex-sb-m bor15 p-t-18 p-b-15 p-lr-40 p-lr-15-sm">
-
-							<div class="flex-c-m stext-101 cl2 size-119 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-10">
-								<a href="/home">Tiếp tục mua hàng</a>
-								
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-sm-10 col-lg-7 col-xl-5 m-lr-auto m-b-50">
-					<div class="bor10 p-lr-40 p-t-30 p-b-40 m-l-63 m-r-40 m-lr-0-xl p-lr-15-sm">
-
-						<div class="flex-w flex-t bor12 p-t-15 p-b-30">
-							<div class="size-208 w-full-ssm">
-								<span class="stext-110 cl2">
-									Shipping:
-								</span>
-							</div>
-
-							<div class="size-209 p-r-18 p-r-0-sm w-full-ssm">
-								<p class="stext-111 cl6 p-t-2">
-								<input style="border: 1px solid black" type="text" placeholder="Vui lòng nhập địa chỉ giao hàng" width="400px">
-		
-								</p>
-								
-								
-							</div>
-							<div class="size-208 w-full-ssm">
-								<span class="stext-110 cl2">
-									Phí giao hàng: 30.000VNĐ
-								</span>
-							</div>
-							
-						</div>
-
-						<div class="flex-w flex-t p-t-27 p-b-33">
-							<div class="size-208">
-								<span class="mtext-101 cl2">
-									Total:
-								</span>
-							</div>
-
-							<div class="size-209 p-t-1">
-								<span class="mtext-110 cl2">
-									<%=cart.total()+30000%>
-								</span>
-							</div>
-						</div>
-
-						<button class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
-							Proceed to Checkout
-						</button>
-					</div>
-				</div>
-			</div>
-		</div>
-	</form>
-		
 	
-		
+	
+		<section class="bg0 p-t-23 p-b-140">
+	<div style="margin-top: 100px">
+		 <div class="container">
+     <div class="row">
+       <div class="col-md-12">
+        <div class="aa-myaccount-area">         
+            <div class="row">
+              <div class="col-md-6">
+                <div class="aa-myaccount-login">
+                <h4>Đăng nhập</h4>
+                 <form action="login" class="aa-login-form" method="POST">   
+                  <p></p>
+                  <label for="">Email<span>*</span></label>
+                   <input type="text" value="" placeholder="Email" name="emailDN" required>
 
+                   <label for="">Mật khẩu<span>*</span></label>
+                    <input type="password" value="" placeholder="Password" name="passDN" required>
+                   
+                    <button type="submit" class="aa-browse-btn">Đăng nhập</button>
+                    <label class="rememberme" for="rememberme"><input type="checkbox" name="rememberme" value="1">Nhớ mật khẩu</label>
+                    <p class="aa-lost-password"><a href="quenMK">Quên mật khẩu?</a></p>
+                  </form>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="aa-myaccount-register">                 
+                 <h4>Đăng ký</h4>
+                
+                 <form action="signup" class="aa-login-form" method="post">
+              <p class="alert-danger" role="alert"></p>
+                     <label for="">Tên người dùng<span>*</span></label>
+                    <input type="text" placeholder="Username" name="userName" required>
+                   <label for="">Email<span>*</span></label>
+                    <input type="text" placeholder="Email" name="email" required>
+                  <label for="">Số điện thoại<span>*</span></label>
+                    <input type="text" placeholder="Phone number" name="phone" required>
+                    <label for="">Mật khẩu<span>*</span></label>
+                    <input type="password" placeholder="Password" name="pass" required>
+                    <label for="">Nhập lại mật khẩu<span>*</span></label>
+                    <input type="password" placeholder="Password" name="re_pass" required>
+                    <button type="submit" class="aa-browse-btn">Đăng ký</button>                    
+                  </form>
+                </div>
+              </div>
+            </div>          
+         </div>
+       </div>
+     </div>
+   </div>
+   </div>
+    </section>
+	
+	
 	<!-- Footer -->
 	<footer class="bg3 p-t-75 p-b-32">
 		<div class="container">
@@ -542,6 +506,27 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	</script>
 <!--===============================================================================================-->
 	<script src="js/main.js"></script>
-
+	
+	
+	 <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script src="js/bootstrap.js"></script>  
+  <!-- SmartMenus jQuery plugin -->
+  <script type="text/javascript" src="js/jquery.smartmenus.js"></script>
+  <!-- SmartMenus jQuery Bootstrap Addon -->
+  <script type="text/javascript" src="js/jquery.smartmenus.bootstrap.js"></script>  
+  <!-- To Slider JS -->
+  <script src="js/sequence.js"></script>
+  <script src="js/sequence-theme.modern-slide-in.js"></script>  
+  <!-- Product view slider -->
+  <script type="text/javascript" src="js/jquery.simpleGallery.js"></script>
+  <script type="text/javascript" src="js/jquery.simpleLens.js"></script>
+  <!-- slick slider -->
+  <script type="text/javascript" src="js/slick.js"></script>
+  <!-- Price picker slider -->
+  <script type="text/javascript" src="js/nouislider.js"></script>
+  <!-- Custom js -->
+  <script src="js/custom.js"></script> 
 </body>
 </html>

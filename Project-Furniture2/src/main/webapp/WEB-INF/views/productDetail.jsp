@@ -71,7 +71,7 @@
 					
 					<div class="right-top-bar flex-w h-full">
 						
-						<a href="#" class="flex-c-m trans-04 p-lr-25">
+						<a href="show_account_page" class="flex-c-m trans-04 p-lr-25">
 							My Account
 						</a>
 
@@ -91,10 +91,7 @@
 					<!-- Menu desktop -->
 					<div class="menu-desktop">
 						<ul class="main-menu">
-							<li class="active-menu">
-								<a href="/home">Home</a>
-								
-							</li>
+							
 			<%for(Category c: categories) {%>
 							<li>
 								<a href=""><%=c.getNameCategories()%></a>
@@ -114,9 +111,14 @@
 
 					<!-- Icon header -->
 					<div class="wrap-icon-header flex-w flex-r-m">
-						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-modal-search">
-							<i class="zmdi zmdi-search"></i>
+						<form action="">
+					 	<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11">
+					 	<div style="border: 0.5px solid black;border-radius: 10px;background-color: #4CAF50;">
+					<input type="text" style="border-bottom-left-radius:10px;border-top-left-radius:10px ;width: 200px;display: inline;">
+					<button type="submit"><i class="zmdi zmdi-search"></i></button>
+					</div>
 						</div>
+			</form>
 
 						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="<%=cart.countItem()%>">
 							<i class="zmdi zmdi-shopping-cart"></i>
