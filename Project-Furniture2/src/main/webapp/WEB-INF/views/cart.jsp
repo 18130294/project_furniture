@@ -7,6 +7,8 @@
 <%@page import="com.example.furniture.model.SubCategory"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+		<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+	
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -42,7 +44,6 @@
 	<%
 	List<Category> categories =(List<Category>)request.getAttribute("categories");
 	List<SubCategory> subCategory =(List<SubCategory>)request.getAttribute("subCategories");
-	List<Product> product =(List<Product>)request.getAttribute("product");
 	
 	Product detailPro = (Product)request.getAttribute("detailPro");
 	Cart cart = (Cart)session.getAttribute("cart");
@@ -65,12 +66,31 @@
 					</div>
 					
 					<div class="right-top-bar flex-w h-full">
+					<c:if test="${sessionScope.account !=null && sessionScope.account.isAdmin==0}">
 						
-						<a href="#" class="flex-c-m trans-04 p-lr-25">
-							My Account
+						<a href="" class="flex-c-m trans-04 p-lr-25">
+							${sessionScope.account.nameUser}
+						</a>
+						<a href="logout" class="flex-c-m trans-04 p-lr-25">
+							Đăng xuất
+						</a>
+		</c:if>
+						  <c:if test="${sessionScope.account==null}">
+                 
+						<a href="show_account_page" class="flex-c-m trans-04 p-lr-25">
+							Đăng nhập
+						</a>			
+										<a href="show_account_page" class="flex-c-m trans-04 p-lr-25">Đăng ký</a>
+						
+                  </c:if>
+                 <%--  <c:if test="${sessionScope.account !=null}">
+                 
+						<a href="logout" class="flex-c-m trans-04 p-lr-25">
+							Đăng xuất
 						</a>
 
-						
+					
+                  </c:if> --%>
 					</div>
 				</div>
 			</div>
@@ -186,7 +206,7 @@
 	</header>
 
 	<!-- Cart --------------------------------------------------------------------------------------------------------------------------->
-	<div class="wrap-header-cart js-panel-cart">
+	<%-- <div class="wrap-header-cart js-panel-cart">
 		<div class="s-full js-hide-cart"></div>
 
 		<div class="header-cart flex-col-l p-l-65 p-r-25">
@@ -241,10 +261,10 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</div> --%>
 		
 	<!-- Shoping Cart -->
-	<form class="bg0 p-t-75 p-b-85">
+	<form class="bg0 p-t-75 p-b-85" action="check_out" method="post">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-10 col-xl-7 m-lr-auto m-b-50">
@@ -257,6 +277,8 @@
 									<th class="column-3">Price</th>
 									<th class="column-4">Quantity</th>
 									<th class="column-5">Total</th>
+									<th class="column-5"></th>
+									
 								</tr>
 				       <%for(Map.Entry<Product,Integer> entry:list.entrySet()){%>
 
@@ -271,17 +293,18 @@
 									<td class="column-4">
 										<div class="wrap-num-product flex-w m-l-auto m-r-0">
 											<div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
-											<a class="fs-16 zmdi zmdi-minus" href="Cart?command=subItem&product_id=<%=entry.getKey().getIdProduct()%>&cartID=<%=System.currentTimeMillis()%>"></a>
+											<a class="fs-16 zmdi zmdi-minus" href="Cart?command=subItem&product_id=<%=entry.getKey().getIdProduct()%>"></a>
 											</div>
 
 											<input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product1" value="<%=entry.getValue()%>">
 
 											<div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
-												<a class="fs-16 zmdi zmdi-plus" href="Cart?command=addItem&product_id=<%=entry.getKey().getIdProduct()%>&cartID=<%=System.currentTimeMillis()%>"></a>
+												<a class="fs-16 zmdi zmdi-plus" href="Cart?command=addItem&product_id=<%=entry.getKey().getIdProduct()%>"></a>
 											</div>
 										</div>
 									</td>
 									<td class="column-5"><%=entry.getKey().getPrice()*entry.getValue()%></td>
+									<td><a class="remove" href="Cart?command=removeItem&product_id=<%=entry.getKey().getIdProduct()%>"><fa class="fa fa-close"></fa></a></td>
 								</tr>
 								<%} %>
 
@@ -311,7 +334,7 @@
 
 							<div class="size-209 p-r-18 p-r-0-sm w-full-ssm">
 								<p class="stext-111 cl6 p-t-2">
-								<input style="border: 1px solid black" type="text" placeholder="Vui lòng nhập địa chỉ giao hàng" width="400px">
+								<input style="border: 1px solid black" type="text" placeholder="Vui lòng nhập địa chỉ giao hàng" width="400px" name ="diachi">
 		
 								</p>
 								
@@ -338,10 +361,11 @@
 								</span>
 							</div>
 						</div>
-
-						<button class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
+						
+						<button type="submit" class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
 							Proceed to Checkout
 						</button>
+						
 					</div>
 				</div>
 			</div>

@@ -7,6 +7,8 @@
 <%@page import="com.example.furniture.model.SubCategory"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+		<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+	
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -68,7 +70,6 @@
 	<%
 	List<Category> categories =(List<Category>)request.getAttribute("categories");
 	List<SubCategory> subCategory =(List<SubCategory>)request.getAttribute("subCategories");
-	List<Product> product =(List<Product>)request.getAttribute("product");
 	
 	Product detailPro = (Product)request.getAttribute("detailPro");
 	Cart cart = (Cart)session.getAttribute("cart");
@@ -178,7 +179,7 @@
 			<ul class="topbar-mobile">
 				<li>
 					<div class="right-top-bar flex-w h-full">
-						
+												
 						</div>
 				</li>
 			</ul>
@@ -219,7 +220,7 @@
 			</div>
 			
 		<div class="header-cart-content flex-w js-pscroll">
-				<ul class="header-cart-wrapitem w-full">
+				<%-- <ul class="header-cart-wrapitem w-full">
 				       <%for(Map.Entry<Product,Integer> entry:list.entrySet()){%>
 				
 					<li class="header-cart-item flex-w flex-t m-b-12">
@@ -239,13 +240,13 @@
 					</li>
 
 				
-				</ul>
+				</ul> --%>
 				
 				<div class="w-full">
-					<div class="header-cart-total w-full p-tb-40">
+					<%-- <div class="header-cart-total w-full p-tb-40">
 						<%=entry.getKey().getPrice()*entry.getValue()%>
 					</div>
-					<%} %>
+					<%} %> --%>
 
 					<div class="header-cart-buttons flex-w w-full">
 						<a href="DisplayCart" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
@@ -278,7 +279,7 @@
                    <input type="text" value="" placeholder="Email" name="emailDN" required>
 
                    <label for="">Mật khẩu<span>*</span></label>
-                    <input type="password" value="" placeholder="Password" name="passDN" required>
+                    <input type="password" value="" placeholder="password" name="passDN" required>
                    
                     <button type="submit" class="aa-browse-btn">Đăng nhập</button>
                     <label class="rememberme" for="rememberme"><input type="checkbox" name="rememberme" value="1">Nhớ mật khẩu</label>

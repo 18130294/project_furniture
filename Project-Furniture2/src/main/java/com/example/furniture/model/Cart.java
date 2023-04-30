@@ -4,14 +4,11 @@ import java.util.Map;
 
 public class Cart {
 	private TreeMap<Product, Integer> listProduct;
-	private long cartID;
 	public Cart() {
 		listProduct = new TreeMap<Product, Integer>();
-		cartID = System.currentTimeMillis();
 	}
-	public Cart(TreeMap<Product, Integer> listProduct, long cartID) {
+	public Cart(TreeMap<Product, Integer> listProduct) {
 		this.listProduct = listProduct;
-		this.cartID = cartID;
 	}
 	
 	public TreeMap<Product, Integer> getListProduct() {
@@ -20,12 +17,8 @@ public class Cart {
 	public void setListProduct(TreeMap<Product, Integer> listProduct) {
 		this.listProduct = listProduct;
 	}
-	public long getCartID() {
-		return cartID;
-	}
-	public void setCartID(long cartID) {
-		this.cartID = cartID;
-	}
+	
+	
 	//them 
 	public void insertToCart(Product p,int quantity) {
 		boolean check=listProduct.containsKey(p);

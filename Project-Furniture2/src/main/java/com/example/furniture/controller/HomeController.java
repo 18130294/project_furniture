@@ -29,7 +29,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 	@Controller
-	@RequestMapping("home")
 	//http:localhost:8080/home
 	public class HomeController {
 		@Autowired //inject ="categoryRepository"==>kỹ thuật Dependency injection
@@ -40,7 +39,7 @@ import jakarta.servlet.http.HttpSession;
 		private ProductRepository productRepository;
 
 		
-		@RequestMapping(value = "",method = RequestMethod.GET)
+		@RequestMapping(value = "home",method = RequestMethod.GET)
 		//return name of jsp file
 		
 		public String getAllCategoriesAndProduct(ModelMap modelMap,HttpServletRequest request) {
@@ -49,7 +48,7 @@ import jakarta.servlet.http.HttpSession;
 			List<SubCategory> subCategories = subCategoryRepository.findAll();
 			//tinh phan bao nhieu trang
 			long count =productRepository.count();
-			long endPage =count/5;
+			long endPage =count/5;//Tính hiển thị bao nhiêu trang
 			if(count%5!=0) {
 				endPage++;
 			}
@@ -61,13 +60,14 @@ import jakarta.servlet.http.HttpSession;
 			Pageable pageable = PageRequest.of(index-1, 5);//index la chỉ số trang hiện tại, 5 là lấy ra 5 sản phâm,
 //			index -1 bởi vì PageRequest.of lấy từ vị trí 0
 			Page<Product> pagedResult = productRepository.findAll(pageable);
+			List<Product> list = pagedResult.getContent();
 			
 
 			modelMap.addAttribute("endPage", endPage);
 			modelMap.addAttribute("categories",categories);
 			modelMap.addAttribute("subCategories",subCategories);
 			modelMap.addAttribute("indexActive", index);
-			modelMap.addAttribute("product",pagedResult);
+			modelMap.addAttribute("product",list);
 			
 			return "index";
 		}

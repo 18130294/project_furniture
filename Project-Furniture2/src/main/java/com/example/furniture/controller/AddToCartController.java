@@ -7,10 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.example.furniture.model.Cart;
 import com.example.furniture.model.Category;
@@ -24,7 +26,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
-@RequestMapping(path="Cart")
 public class AddToCartController {
 	@Autowired 
 	private ProductRepository productRepository;
@@ -32,9 +33,11 @@ public class AddToCartController {
 	private CategoryRepository categoryRepository;
 	@Autowired
 	private SubCategoryRepository subCategoryRepository;
-	@GetMapping
-	public String addToCart(ModelMap modelMap,@RequestParam("product_id") Integer idProduct,HttpServletRequest request,HttpSession session,
-			@RequestParam("command") String command) {
+	
+	
+	@GetMapping("Cart")
+	public ModelAndView addToCart(ModelMap modelMap,@RequestParam("product_id") Integer idProduct,HttpServletRequest request,HttpSession session,
+			@RequestParam("command") String command ) {
 		
 		List<Category> categories = categoryRepository.findAll();
 		List<SubCategory> subCategories = subCategoryRepository.findAll();
@@ -47,48 +50,24 @@ public class AddToCartController {
 		session = request.getSession();
 		Cart cart = (Cart)session.getAttribute("cart");
 		
-		ArrayList<Long> listBuy =null;
-		String url ="cart";
-		try {
-			listBuy =(ArrayList<Long>)session.getAttribute("cartID");
-			long idBuy =0;
-			if(request.getParameter("cartID")!=null) {
-				idBuy=Long.parseLong(request.getParameter("cartID"));
-			}
-			Product product =productRepository.getReferenceById(idProduct);
+		String url ="redirect:/home";
+			Product product =productRepository.findByIdProduct(idProduct);
+			
 		switch (command) {
-	
 		case "insertItem": 
-			if(listBuy==null) {
-				listBuy=new ArrayList<Long>();
-				session.setAttribute("cartID", listBuy);
-				}
-			if(listBuy.indexOf(idBuy)==-1) {
+			
 				cart.insertToCart(product, 1);
-				listBuy.add(idBuy);
-			}
-			url="cart";
+				
+			url="redirect:/home";
 			break;
 		case "addItem": //tang so luong
-			if(listBuy==null) {
-				listBuy=new ArrayList<Long>();
-				session.setAttribute("cartID", listBuy);
-				}
-			if(listBuy.indexOf(idBuy)==-1) {
+			
 				cart.insertToCart(product, 1);
-				listBuy.add(idBuy);
-			}
+				
 			url="cart";
 			break;
 		case "subItem": 
-			if(listBuy==null) {
-				listBuy=new ArrayList<Long>();
-				session.setAttribute("cartID", listBuy);
-				}
-			if(listBuy.indexOf(idBuy)==-1) {
-				cart.removeToCart(product, 1);
-				listBuy.add(idBuy);
-			}
+				cart.removeToCart(product, 1);		
 		url="cart";
 		break;
 		case "removeItem": 
@@ -96,15 +75,12 @@ public class AddToCartController {
 		url="cart";
 		break;
 		default:
-			url="cart";
+			url="redirect:/home";
 			break;
 		}
-return url;
+return new ModelAndView(url);
 
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-		return "";
+		
 		}
 
 

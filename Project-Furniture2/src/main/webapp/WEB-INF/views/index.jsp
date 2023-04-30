@@ -11,7 +11,7 @@
  <!DOCTYPE html>
  <%@page import="java.util.List"%>
 <%@page import="com.example.furniture.model.Category"%>
-<html lang="en">
+<html lang="en" >
 <head>
 	<title>Home</title>
 	<meta charset="UTF-8">
@@ -70,9 +70,9 @@
 	<%
 	List<Category> categories =(List<Category>)request.getAttribute("categories");
 	List<SubCategory> subCategory =(List<SubCategory>)request.getAttribute("subCategories");
-/* 	List<Product> product =(List<Product>)request.getAttribute("product");
- */	
-	Page<Product> product =(Page<Product>)request.getAttribute("product");//Phân trang
+	List<Product> product =(List<Product>)request.getAttribute("product");
+ 
+	/* Page<Product> product =(Page<Product>)request.getAttribute("product");//Phân trang */
 	
 	long endPage = (long)request.getAttribute("endPage");
 	int indexActive = (int)request.getAttribute("indexActive");
@@ -103,21 +103,26 @@
 						<a href="" class="flex-c-m trans-04 p-lr-25">
 							${sessionScope.account.nameUser}
 						</a>
+						<a href="logout" class="flex-c-m trans-04 p-lr-25">
+							Đăng xuất
+						</a>
 </c:if>
 						  <c:if test="${sessionScope.account ==null}">
                  
 						<a href="show_account_page" class="flex-c-m trans-04 p-lr-25">
-							Đăng nhập/ Đăng ký
-						</a>
+							Đăng nhập
+						</a>						
+							<a href="show_account_page" class="flex-c-m trans-04 p-lr-25">Đăng ký</a>
+						
                   </c:if>
-                  <c:if test="${sessionScope.account !=null}">
+                 <%--  <c:if test="${sessionScope.account !=null}">
                  
 						<a href="logout" class="flex-c-m trans-04 p-lr-25">
 							Đăng xuất
 						</a>
 
 					
-                  </c:if>
+                  </c:if> --%>
 					</div>
 				</div>
 			</div>
@@ -268,7 +273,7 @@
 			</div>
 			
 			<div class="header-cart-content flex-w js-pscroll">
-				<ul class="header-cart-wrapitem w-full">
+				<%-- <ul class="header-cart-wrapitem w-full">
 				       <%for(Map.Entry<Product,Integer> entry:list.entrySet()){%>
 				
 					<li class="header-cart-item flex-w flex-t m-b-12">
@@ -287,13 +292,13 @@
 					</li>
 
 				
-				</ul>
+				</ul> --%>
 				
 				<div class="w-full">
-					<div class="header-cart-total w-full p-tb-40">
+					<%-- <div class="header-cart-total w-full p-tb-40">
 						<%=entry.getKey().getPrice()*entry.getValue()%>
 					</div>
-					<%} %>
+					<%} %> --%>
 
 					<div class="header-cart-buttons flex-w w-full">
 						<a href="DisplayCart" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
@@ -307,7 +312,7 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</div> 
  
 		
 
@@ -423,7 +428,7 @@
 						
 						<a href="DetailProductController?idDetailProduct=<%=pro.getIdProduct()%>"><img src="images/img/<%=pro.getImages()%>" alt="IMG-PRODUCT"></a>
 
-							<a href="Cart?command=insertItem&product_id=<%=pro.getIdProduct()%>&cartID=<%=System.currentTimeMillis()%>" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">
+							<a href="Cart?command=insertItem&product_id=<%=pro.getIdProduct()%>" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">
 								Add To Cart
 							</a>
 						</div>

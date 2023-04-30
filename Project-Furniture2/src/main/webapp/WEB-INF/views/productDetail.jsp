@@ -8,6 +8,8 @@
 <%@page import="com.example.furniture.model.Product"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+		<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+	
 <html lang="en">
 <head>
 	<title>Product Detail</title>
@@ -70,12 +72,31 @@
 					</div>
 					
 					<div class="right-top-bar flex-w h-full">
+					<c:if test="${sessionScope.account !=null && sessionScope.account.isAdmin==0}">
 						
+						<a href="" class="flex-c-m trans-04 p-lr-25">
+							${sessionScope.account.nameUser}
+						</a>
+						<a href="logout" class="flex-c-m trans-04 p-lr-25">
+							Đăng xuất
+						</a>
+</c:if>
+						  <c:if test="${sessionScope.account ==null}">
+                 
 						<a href="show_account_page" class="flex-c-m trans-04 p-lr-25">
-							My Account
+							Đăng nhập
+						</a>
+							<a href="show_account_page" class="flex-c-m trans-04 p-lr-25">Đăng ký</a>
+						
+                  </c:if>
+                 <%--  <c:if test="${sessionScope.account !=null}">
+                 
+						<a href="logout" class="flex-c-m trans-04 p-lr-25">
+							Đăng xuất
 						</a>
 
-						
+					
+                  </c:if> --%>
 					</div>
 				</div>
 			</div>
@@ -206,7 +227,7 @@
 			</div>
 			
 			<div class="header-cart-content flex-w js-pscroll">
-				<ul class="header-cart-wrapitem w-full">
+				<%-- <ul class="header-cart-wrapitem w-full">
 				       <%for(Map.Entry<Product,Integer> entry:list.entrySet()){%>
 				
 					<li class="header-cart-item flex-w flex-t m-b-12">
@@ -225,13 +246,13 @@
 					</li>
 
 				
-				</ul>
+				</ul> --%>
 				
 				<div class="w-full">
-					<div class="header-cart-total w-full p-tb-40">
+					<%-- <div class="header-cart-total w-full p-tb-40">
 						<%=entry.getKey().getPrice()*entry.getValue()%>
 					</div>
-					<%} %>
+					<%} %> --%>
 
 					<div class="header-cart-buttons flex-w w-full">
 						<a href="DisplayCart" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
@@ -313,19 +334,9 @@
 						
 							<div class="flex-w flex-r-m p-b-10">
 								<div class="size-204 flex-w flex-m respon6-next">
-									<div class="wrap-num-product flex-w m-r-20 m-tb-10">
-										<div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
-											<i class="fs-16 zmdi zmdi-minus"></i>
-										</div>
+								
 
-										<input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product" value="1">
-
-										<div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
-											<i class="fs-16 zmdi zmdi-plus"></i>
-										</div>
-									</div>
-
-									<a href="Cart?command=insertItem&product_id=<%=idDetailProduct.getIdProduct()%>&cartID=<%=System.currentTimeMillis()%>" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">
+									<a href="Cart?command=insertItem&product_id=<%=idDetailProduct.getIdProduct()%>" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">
 										Add to cart
 									</a>
 								</div>
