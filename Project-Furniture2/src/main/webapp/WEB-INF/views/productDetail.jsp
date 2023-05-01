@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+<%@page import="java.text.NumberFormat"%>
+<%@page import="java.util.Locale"%>
 <%@page import="java.util.Map"%>
 <%@page import="java.util.TreeMap"%>
 <%@page import="com.example.furniture.model.Cart"%>
@@ -58,7 +60,8 @@
 		  session.setAttribute("cart", cart);
 	}
 	  TreeMap<Product,Integer> list =cart.getListProduct();
-	
+	  Locale localeEN = new Locale("vi", "VN");
+	  NumberFormat en = NumberFormat.getInstance(localeEN);
   %>
 	<!-- Header -->
 	<header>
@@ -132,17 +135,17 @@
 
 					<!-- Icon header -->
 					<div class="wrap-icon-header flex-w flex-r-m">
-						<form action="">
+						<!-- <form action="">
 					 	<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11">
 					 	<div style="border: 0.5px solid black;border-radius: 10px;background-color: #4CAF50;">
 					<input type="text" style="border-bottom-left-radius:10px;border-top-left-radius:10px ;width: 200px;display: inline;">
 					<button type="submit"><i class="zmdi zmdi-search"></i></button>
 					</div>
 						</div>
-			</form>
+			</form> -->
 
-						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="<%=cart.countItem()%>">
-							<i class="zmdi zmdi-shopping-cart"></i>
+						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti" data-notify="<%=cart.getListProduct().size()%>">
+							<a href="DisplayCart"><i class="zmdi zmdi-shopping-cart"></i></a>
 						</div>
 
 					</div>
@@ -322,7 +325,7 @@
 						</h4>
 
 						<span class="mtext-106 cl2">
-							<%=idDetailProduct.getPrice() %>
+							<%=en.format(idDetailProduct.getPrice()) VNĐ %>
 						</span>
 
 						<p class="stext-102 cl3 p-t-23">

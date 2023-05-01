@@ -1,3 +1,5 @@
+<%@page import="java.util.Locale"%>
+<%@page import="java.text.NumberFormat"%>
 <%@page import="com.example.furniture.model.Category"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.Map"%>
@@ -52,6 +54,10 @@
 		  session.setAttribute("cart", cart);
 	}
 	  TreeMap<Product,Integer> list =cart.getListProduct();
+	  
+	  Locale localeEN = new Locale("vi", "VN");
+	  NumberFormat en = NumberFormat.getInstance(localeEN);
+
 
   %>
 	<!-- Header -->
@@ -126,18 +132,18 @@
 
 					<!-- Icon header -->
 					<div class="wrap-icon-header flex-w flex-r-m">
-						<form action="">
+						<!-- <form action="">
 					 	<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11">
 					 	<div style="border: 0.5px solid black;border-radius: 10px;background-color: #4CAF50;">
 					<input type="text" style="border-bottom-left-radius:10px;border-top-left-radius:10px ;width: 200px;display: inline;">
 					<button type="submit"><i class="zmdi zmdi-search"></i></button>
 					</div>
 						</div>
-			</form>
+			</form> -->
                        
 
-						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="<%=cart.countItem()%>">
-							<i class="zmdi zmdi-shopping-cart"></i>
+						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti" data-notify="<%=cart.getListProduct().size()%>">
+							<a href="DisplayCart"><i class="zmdi zmdi-shopping-cart"></i></a>
 						</div>
 
 					</div>
@@ -289,7 +295,7 @@
 										</div>
 									</td>
 									<td class="column-2"><%=entry.getKey().getNameProduct()%></td>
-									<td class="column-3"><%=entry.getKey().getPrice()%></td>
+									<td class="column-3"><%=en.format(entry.getKey().getPrice())%></td>
 									<td class="column-4">
 										<div class="wrap-num-product flex-w m-l-auto m-r-0">
 											<div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
@@ -303,7 +309,7 @@
 											</div>
 										</div>
 									</td>
-									<td class="column-5"><%=entry.getKey().getPrice()*entry.getValue()%></td>
+									<td class="column-5"><%=en.format(entry.getKey().getPrice()*entry.getValue())%></td>
 									<td><a class="remove" href="Cart?command=removeItem&product_id=<%=entry.getKey().getIdProduct()%>"><fa class="fa fa-close"></fa></a></td>
 								</tr>
 								<%} %>
@@ -341,10 +347,11 @@
 								
 							</div>
 							<div class="size-208 w-full-ssm">
-								<span class="stext-110 cl2">
-									Phí giao hàng: 30.000VNĐ
-								</span>
+								
 							</div>
+							<div><span class="stext-110 cl2">
+									Phí giao hàng: 30.000VNĐ
+								</span></div>
 							
 						</div>
 
@@ -357,7 +364,7 @@
 
 							<div class="size-209 p-t-1">
 								<span class="mtext-110 cl2">
-									<%=cart.total()+30000%>
+									<%=en.format(cart.total()+30000)%> VNĐ
 								</span>
 							</div>
 						</div>

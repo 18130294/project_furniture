@@ -46,7 +46,7 @@ import jakarta.servlet.http.HttpSession;
 			//ModelMap là để gửi dữ liệu từ database lên
 			List<Category> categories = categoryRepository.findAll();
 			List<SubCategory> subCategories = subCategoryRepository.findAll();
-			//tinh phan bao nhieu trang
+//			//tinh phan bao nhieu trang
 			long count =productRepository.count();
 			long endPage =count/5;//Tính hiển thị bao nhiêu trang
 			if(count%5!=0) {
@@ -60,6 +60,7 @@ import jakarta.servlet.http.HttpSession;
 			Pageable pageable = PageRequest.of(index-1, 5);//index la chỉ số trang hiện tại, 5 là lấy ra 5 sản phâm,
 //			index -1 bởi vì PageRequest.of lấy từ vị trí 0
 			Page<Product> pagedResult = productRepository.findAll(pageable);
+//			List<Product> list = productRepository.findAll();
 			List<Product> list = pagedResult.getContent();
 			
 

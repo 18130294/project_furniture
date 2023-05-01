@@ -1,3 +1,5 @@
+<%@page import="java.util.Locale"%>
+<%@page import="java.text.NumberFormat"%>
 <%@page import="org.springframework.data.domain.Page"%>
 <%@page import="java.util.Map"%>
 <%@page import="java.util.TreeMap"%>
@@ -75,7 +77,7 @@
 	/* Page<Product> product =(Page<Product>)request.getAttribute("product");//Phân trang */
 	
 	long endPage = (long)request.getAttribute("endPage");
-	int indexActive = (int)request.getAttribute("indexActive");
+	int indexActive = (int)request.getAttribute("indexActive") ;
 
 	Product detailPro = (Product)request.getAttribute("detailPro");
 	Cart cart = (Cart)session.getAttribute("cart");
@@ -85,6 +87,8 @@
 	}
 	  TreeMap<Product,Integer> list =cart.getListProduct();
 	
+	  Locale localeEN = new Locale("vi", "VN");
+	  NumberFormat en = NumberFormat.getInstance(localeEN);
   %>
 	<!-- Header -->
 	<header>
@@ -158,16 +162,14 @@
 
 					<!-- Icon header -->
 					<div class="wrap-icon-header flex-w flex-r-m">
-					<form action="">
 					 	<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11">
 					 	<div style="border: 0.5px solid black;border-radius: 10px;background-color: #4CAF50;">
-					<input type="text" style="border-bottom-left-radius:10px;border-top-left-radius:10px ;width: 200px;display: inline;">
-					<button type="submit"><i class="zmdi zmdi-search"></i></button>
+					<input oninput="searchByName(this)" type="text" name="txt" style="border-bottom-left-radius:10px;border-top-left-radius:10px ;width: 200px;display: inline;">
+					<i class="zmdi zmdi-search"></i>
 					</div>
 						</div>
-			</form>
-						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="<%=cart.countItem()%>">
-							<i class="zmdi zmdi-shopping-cart"></i>
+						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti" data-notify="<%=cart.getListProduct().size()%>">
+							<a href="DisplayCart"><i class="zmdi zmdi-shopping-cart"></i></a>
 						</div>
 
 					</div>
@@ -417,7 +419,7 @@
 
 			</div>
 
-			<div class="row isotope-grid">
+			<div class="row isotope-grid" id="content">
 			<%for(Product pro:product) {%>
 				<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
 					<!-- Block2 -->
@@ -440,7 +442,7 @@
 								</a>
 
 								<span class="stext-105 cl3">
-									<%=pro.getPrice() %>
+									<%=en.format(pro.getPrice())%> VNĐ
 								</span>
 							</div>
 
@@ -460,9 +462,9 @@
 			
 			<!-- Load more -->
 				<div class="pagination">
-			    <% for (int i=1; i<= endPage;i++) {%>
+			 <% for (int i=1; i<= endPage;i++) {%>
 			  <a class="<%=indexActive==i?"active":""%>" href="home?indexPage=<%=i%>"><%=i%></a>
-			 <%} %>
+			 <%} %> 
 </div>
 
 		</div>
@@ -742,6 +744,30 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 			</div>
 		</div>
 	</div>
+	
+<!-- 	search
+ -->	
+ <script>
+ 	function searchByName(param){
+ 		var txtSearch = param.value;
+ 		$.ajax({
+ 			url: "/search",
+ 			type: "get",
+ 			data: {
+ 				txt: txtSearch
+ 			},
+ 			success: function (data){
+ 				var row = document.getElementById("content");
+ 				row.innerHTML = data;
+ 			},
+ 			error: function(xhr){
+ 				
+ 			}
+ 	
+ 		});
+ 	}
+	
+	</script>
 
 <!--===============================================================================================-->	
 	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
