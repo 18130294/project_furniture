@@ -2,6 +2,8 @@ package com.example.furniture.model;
 
 
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller
 
 ;
@@ -48,6 +50,5 @@ public class Category {
 	public String toString() {
 		return "Category [idCategories=" + idCategories + ", nameCategories=" + nameCategories + "]";
 	}
-	
 	
 }
