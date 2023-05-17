@@ -1,15 +1,21 @@
 package com.example.furniture.admin;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.furniture.model.Category;
@@ -33,7 +39,8 @@ public class AdAddProduct {
 	private ProductRepository productRepository;
 	@Autowired
 	private UserRepository userRepository;
-	
+    @Value("${upload.dir}")
+    private String uploadDir;
 	@GetMapping("adminadd")
 	public String addToCart(ModelMap modelMap) {
 		List<Category> categories = categoryRepository.findAll();
@@ -46,9 +53,9 @@ public class AdAddProduct {
 		return "ad_addproduct";
 	}
 	
-	@PostMapping(path="addpradmin")
+	@PostMapping(path="savepr")
 	public ModelAndView addProductSus(ModelMap modelMap, @RequestParam("id") int id, @RequestParam("name") String name,  @RequestParam("soluong") int soluong,
-			@RequestParam("describes") String describes, @RequestParam("price") int price, @RequestParam("namesc") String namesc, @RequestParam("img") String img) {
+			@RequestParam("describes") String describes, @RequestParam("price") int price, @RequestParam("namesc") String namesc, @RequestParam("img") MultipartFile img) {
 		Product pr = new Product();
 		SubCategory sc = new SubCategory();
 		double priced = (double) price;
@@ -56,8 +63,17 @@ public class AdAddProduct {
 		List<SubCategory> listsc =subCategoryRepository.findAll();
 		Product check = pr.checkProduct(listpr, id);
 		SubCategory checkid= sc.checkSubCategory(listsc, namesc);
+		String fileName = StringUtils.cleanPath(img.getOriginalFilename());
+		try {
+			 Path path = Paths.get(uploadDir + fileName);
+	            Files.copy(img.getInputStream(), path);
+	           
+		} catch (Exception e) {
+			 e.printStackTrace();
+		}
 		if(check == null) {
-			Product pr1 = new Product(id, checkid.getIdcategories(),checkid.getIdSubcategory() , name, price,img, soluong, describes);
+			Product pr1 = new Product(id, checkid.getIdcategories(),checkid.getIdSubcategory() , name, price,
+					fileName, soluong, describes);
 			productRepository.save(pr1);
 			System.out.println("So tai khoan" +userRepository.count());
 			

@@ -8,7 +8,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
 <head>
 	<title>Shoping Cart</title>
 	<meta charset="UTF-8">
@@ -267,13 +267,14 @@
     <div class="row">
         <div class="col-md-12">
             <div class="well well-sm">
-                <form action="addpradmin" class="form-horizontal" method="post">
+                <form action="savepr" class="form-horizontal" method="post" enctype="multipart/form-data">
                     <fieldset>
                         <legend class="text-center header">Contact us</legend>
                         <div class="form-group">                     
  <span class="col-md-1 col-md-offset-2 text-center"></span>
                             <div class="col-md-8">
                                 <input id="fname" name="id" type="number" placeholder="id product" class="form-control"  required> 
+                            
                             </div>
                         </div>
                           <div class="form-group">                              
@@ -328,7 +329,7 @@
                         </div>
                         <div class="form-group">
                             <div class="col-md-12 text-center">
-                             <button class="btn btn-primary btn-lg" style="background-color: red">Cancel</button>
+                             <button class="btn btn-primary btn-lg" style="background-color: red">  <a href="home" style="color: white;">Cancel</a> </button>
                                 <button type="submit" class="btn btn-primary btn-lg">Submit</button>
                             </div>
                         </div>
