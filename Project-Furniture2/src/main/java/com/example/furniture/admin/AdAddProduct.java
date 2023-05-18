@@ -5,6 +5,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -14,6 +15,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -85,5 +87,22 @@ public class AdAddProduct {
 		
 		return new ModelAndView("redirect:/adminadd",modelMap);
 		
+	}
+	@GetMapping("adhome")
+	public String adHome(ModelMap modelMap) {
+		List<Category> categories = categoryRepository.findAll();
+		List<SubCategory> subCategories = subCategoryRepository.findAll();
+		List<Product> product1 = productRepository.findAll();
+		modelMap.addAttribute("categories", categories);
+		modelMap.addAttribute("subCategories", subCategories);
+
+		modelMap.addAttribute("product", product1);
+		return "ad_home";
+	}
+
+	@RequestMapping(value = "Deletepr",method = RequestMethod.GET)
+	public ModelAndView deletePr(ModelMap modelMap, @RequestParam("idDetailProduct") Integer id ) {
+		 productRepository.deleteById(id);
+		return new ModelAndView("redirect:/adhome",modelMap);
 	}
 }
