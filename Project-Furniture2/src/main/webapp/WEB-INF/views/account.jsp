@@ -1,4 +1,3 @@
-<%@page import="com.example.furniture.model.Category"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.Map"%>
 <%@page import="java.util.TreeMap"%>
@@ -7,7 +6,10 @@
 <%@page import="com.example.furniture.model.SubCategory"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@page import="com.example.furniture.model.Category"%>
+
 		<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 	
 <!DOCTYPE html>
 <html lang="en">
@@ -64,7 +66,15 @@
     <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
     
-
+<style>
+.aa-login-form .aa-lost-password a {
+    color: #717fe0;
+    font-weight: bold;
+}
+.aa-lost-password a:hover{
+color:  #ff6666;
+}
+</style>
 </head>
 <body class="animsition">
 	<%
@@ -92,7 +102,12 @@
 					</div>
 					
 					<div class="right-top-bar flex-w h-full">
-						
+					<a href="<c:url value="?lang=vi"/>" class="flex-c-m trans-04 p-lr-25">
+<spring:message code="app.lang.vi" />
+</a>
+<a href="<c:url value="?lang=en"/>" class="flex-c-m trans-04 p-lr-25">
+<spring:message code="app.lang.en" />
+</a>
 
 						
 					</div>
@@ -272,38 +287,38 @@
             <div class="row">
               <div class="col-md-6">
                 <div class="aa-myaccount-login">
-                <h4>Đăng nhập</h4>
+                <h4><spring:message code="app.text.login" /></h4>
                  <form action="login" class="aa-login-form" method="POST">   
                   <p></p>
                   <label for="">Email<span>*</span></label>
-                   <input type="text" value="" placeholder="Email" name="emailDN" required>
+                   <input type="text" value="" placeholder="<spring:message code="app.email" />"  name="emailDN" required>
 
-                   <label for="">Mật khẩu<span>*</span></label>
-                    <input type="password" value="" placeholder="password" name="passDN" required>
+                   <label for=""><spring:message code="app.password"/><span>*</span></label>
+                    <input type="password" value="" placeholder="<spring:message code="app.password" />"  name="passDN" required>
                    
-                    <button type="submit" class="aa-browse-btn">Đăng nhập</button>
-                    <label class="rememberme" for="rememberme"><input type="checkbox" name="rememberme" value="1">Nhớ mật khẩu</label>
-                    <p class="aa-lost-password"><a href="quenMK">Quên mật khẩu?</a></p>
+                    <button type="submit" class="aa-browse-btn"><spring:message code="app.text.login"/></button>
+                    <label class="rememberme" for="rememberme"><input type="checkbox" name="rememberme" value="1"><spring:message code="app.remember.password"/></label>
+                    <p class="aa-lost-password"><a href="forgetPass"><spring:message code="app.forgot.password"/></a></p>
                   </form>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="aa-myaccount-register">                 
-                 <h4>Đăng ký</h4>
+                 <h4><spring:message code="app.text.signup"/></h4>
                 
                  <form action="signup" class="aa-login-form" method="post">
               <p class="alert-danger" role="alert"></p>
-                     <label for="">Tên người dùng<span>*</span></label>
-                    <input type="text" placeholder="Username" name="userName" required>
+                     <label for=""><spring:message code="app.username"/><span>*</span></label>
+                    <input type="text" placeholder="<spring:message code="app.username"/>" name="userName" required>
                    <label for="">Email<span>*</span></label>
                     <input type="text" placeholder="Email" name="email" required>
-                  <label for="">Số điện thoại<span>*</span></label>
-                    <input type="text" placeholder="Phone number" name="phone" required>
-                    <label for="">Mật khẩu<span>*</span></label>
-                    <input type="password" placeholder="Password" name="pass" required>
-                    <label for="">Nhập lại mật khẩu<span>*</span></label>
-                    <input type="password" placeholder="Password" name="re_pass" required>
-                    <button type="submit" class="aa-browse-btn">Đăng ký</button>                    
+                  <label for=""><spring:message code="app.phone.number"/><span>*</span></label>
+                    <input type="text" placeholder="<spring:message code="app.phone.number"/>" name="phone" required>
+                    <label for=""><spring:message code="app.password"/><span>*</span></label>
+                    <input type="password" placeholder="<spring:message code="app.password"/>" name="pass" required>
+                    <label for=""><spring:message code="app.repassword"/><span>*</span></label>
+                    <input type="password" placeholder="<spring:message code="app.repassword"/>" name="re_pass" required>
+                    <button type="submit" class="aa-browse-btn"><spring:message code="app.text.signup"/></button>                    
                   </form>
                 </div>
               </div>

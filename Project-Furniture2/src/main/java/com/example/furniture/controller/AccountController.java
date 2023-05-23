@@ -125,6 +125,16 @@ public class AccountController {
 			session.invalidate();
 			return new ModelAndView("redirect:/home");
 	}
+	@GetMapping("forgetPass")
+	public String showPageForgetPass(ModelMap modelMap) {
+		List<Category> categories = categoryRepository.findAll();
+		List<SubCategory> subCategories = subCategoryRepository.findAll();
+		List<Product> product1 = productRepository.findAll();
+		modelMap.addAttribute("product", product1);
 
+		modelMap.addAttribute("categories", categories);
+		modelMap.addAttribute("subCategories", subCategories);
+		return "forgetPassword";
+}
 
 }

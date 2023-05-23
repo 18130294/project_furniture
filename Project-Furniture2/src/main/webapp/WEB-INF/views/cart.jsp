@@ -10,6 +10,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 		<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+	<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 	
 <!DOCTYPE html>
 <html lang="en">
@@ -78,13 +79,14 @@
 							${sessionScope.account.nameUser}
 						</a>
 						<a href="logout" class="flex-c-m trans-04 p-lr-25">
-							Đăng xuất
+							<spring:message code="app.text.logout"/>
+							
 						</a>
 		</c:if>
 						  <c:if test="${sessionScope.account==null}">
                  
 						<a href="show_account_page" class="flex-c-m trans-04 p-lr-25">
-							Đăng nhập
+							<spring:message code="app.text.login"/>
 						</a>			
 										<a href="show_account_page" class="flex-c-m trans-04 p-lr-25">Đăng ký</a>
 						
@@ -97,6 +99,12 @@
 
 					
                   </c:if> --%>
+                  <a href="<c:url value="?lang=vi"/>" class="flex-c-m trans-04 p-lr-25">
+<spring:message code="app.lang.vi" />
+</a>
+<a href="<c:url value="?lang=en"/>" class="flex-c-m trans-04 p-lr-25">
+<spring:message code="app.lang.en" />
+</a>
 					</div>
 				</div>
 			</div>
@@ -278,11 +286,11 @@
 						<div class="wrap-table-shopping-cart">
 							<table class="table-shopping-cart">
 								<tr class="table_head">
-									<th class="column-1">Product</th>
+									<th class="column-1"><spring:message code="app.product"/></th>
 									<th class="column-2"></th>
-									<th class="column-3">Price</th>
-									<th class="column-4">Quantity</th>
-									<th class="column-5">Total</th>
+									<th class="column-3"><spring:message code="app.price"/></th>
+									<th class="column-4"><spring:message code="app.quantity"/></th>
+									<th class="column-5"><spring:message code="app.total"/></th>
 									<th class="column-5"></th>
 									
 								</tr>
@@ -321,7 +329,7 @@
 						<div class="flex-w flex-sb-m bor15 p-t-18 p-b-15 p-lr-40 p-lr-15-sm">
 
 							<div class="flex-c-m stext-101 cl2 size-119 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-10">
-								<a href="/home">Tiếp tục mua hàng</a>
+								<a href="/home"><spring:message code="app.continute.buy"/></a>
 								
 							</div>
 						</div>
@@ -340,7 +348,7 @@
 
 							<div class="size-209 p-r-18 p-r-0-sm w-full-ssm">
 								<p class="stext-111 cl6 p-t-2">
-								<input style="border: 1px solid black" type="text" placeholder="Vui lòng nhập địa chỉ giao hàng" width="400px" name ="diachi">
+								<input style="border: 1px solid black" type="text" placeholder="<spring:message code="app.shipping"/>" width="400px" name ="diachi">
 		
 								</p>
 								
@@ -350,7 +358,7 @@
 								
 							</div>
 							<div><span class="stext-110 cl2">
-									Phí giao hàng: 30.000VNĐ
+									<spring:message code="app.ship.cost"/>: 30.000VNĐ
 								</span></div>
 							
 						</div>
@@ -358,7 +366,7 @@
 						<div class="flex-w flex-t p-t-27 p-b-33">
 							<div class="size-208">
 								<span class="mtext-101 cl2">
-									Total:
+									<spring:message code="app.total"/>
 								</span>
 							</div>
 
@@ -370,7 +378,7 @@
 						</div>
 						
 						<button type="submit" class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
-							Proceed to Checkout
+							<spring:message code="app.check.out"/>
 						</button>
 						
 					</div>

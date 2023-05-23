@@ -9,6 +9,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 		<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+	<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 	
  <!DOCTYPE html>
  <%@page import="java.util.List"%>
@@ -102,15 +103,15 @@
 							${sessionScope.account.nameUser}
 						</a>
 						<a href="logout" class="flex-c-m trans-04 p-lr-25">
-							Đăng xuất
+							<spring:message code="app.text.logout"/>
 						</a>
 </c:if>
 						  <c:if test="${sessionScope.account ==null}">
                  
 						<a href="show_account_page" class="flex-c-m trans-04 p-lr-25">
-							Đăng nhập
+							<spring:message code="app.text.login"/>
 						</a>
-													<a href="show_account_page" class="flex-c-m trans-04 p-lr-25">Đăng ký</a>
+													<a href="show_account_page" class="flex-c-m trans-04 p-lr-25"><spring:message code="app.text.signup"/></a>
 						
                   </c:if>
                  <%--  <c:if test="${sessionScope.account !=null}">
@@ -121,6 +122,12 @@
 
 					
                   </c:if> --%>
+                    <a href="<c:url value="?lang=vi"/>" class="flex-c-m trans-04 p-lr-25">
+<spring:message code="app.lang.vi" />
+</a>
+<a href="<c:url value="?lang=en"/>" class="flex-c-m trans-04 p-lr-25">
+<spring:message code="app.lang.en" />
+</a>
 					</div>
 				</div>
 			</div>
@@ -165,7 +172,7 @@
 						</div>
 			</form> -->
 
-						<<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti" data-notify="<%=cart.getListProduct().size()%>">
+						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti" data-notify="<%=cart.getListProduct().size()%>">
 							<a href="DisplayCart"><i class="zmdi zmdi-shopping-cart"></i></a>
 						</div>
 
@@ -379,14 +386,14 @@
 		<div class="container">
 			<div class="p-b-10">
 				<h3 class="ltext-103 cl5">
-					Product Overview
+					
 				</h3>
 			</div>
 
 			<div class="flex-w flex-sb-m p-b-52">
 				<div class="flex-w flex-l-m filter-tope-group m-tb-10">
 					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1" data-filter="*">
-						All Products
+						<spring:message code="app.all.product"/>
 					</button>
 
 					
@@ -406,7 +413,7 @@
 						<a href="DetailProductController?idDetailProduct=<%=pro.getIdProduct()%>"><img src="images/img/<%=pro.getImages()%>" alt="IMG-PRODUCT"></a>
 
 							<a href="Cart?command=insertItem&product_id=<%=pro.getIdProduct()%>" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">
-								Add To Cart
+								<spring:message code="app.add.to.cart"/>
 							</a>
 						</div>
 
@@ -417,7 +424,8 @@
 								</a>
 
 								<span class="stext-105 cl3">
-									<%=en.format(pro.getPrice()) VNĐ %>
+								<%=en.format(pro.getPrice())%>VNĐ
+								
 								</span>
 							</div>
 

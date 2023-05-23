@@ -11,6 +11,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 		<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+		<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 	
 <html lang="en">
 <head>
@@ -81,15 +82,17 @@
 							${sessionScope.account.nameUser}
 						</a>
 						<a href="logout" class="flex-c-m trans-04 p-lr-25">
-							Đăng xuất
+							<spring:message code="app.text.logout"/>
 						</a>
 </c:if>
 						  <c:if test="${sessionScope.account ==null}">
                  
 						<a href="show_account_page" class="flex-c-m trans-04 p-lr-25">
-							Đăng nhập
+						<spring:message code="app.text.login"/>
+
 						</a>
-							<a href="show_account_page" class="flex-c-m trans-04 p-lr-25">Đăng ký</a>
+							<a href="show_account_page" class="flex-c-m trans-04 p-lr-25"><spring:message code="app.text.signup"/>
+							</a>
 						
                   </c:if>
                  <%--  <c:if test="${sessionScope.account !=null}">
@@ -100,6 +103,12 @@
 
 					
                   </c:if> --%>
+                                  <a href="<c:url value="?lang=vi"/>" class="flex-c-m trans-04 p-lr-25">
+<spring:message code="app.lang.vi" />
+</a>
+<a href="<c:url value="?lang=en"/>" class="flex-c-m trans-04 p-lr-25">
+<spring:message code="app.lang.en" />
+</a>
 					</div>
 				</div>
 			</div>
@@ -325,7 +334,7 @@
 						</h4>
 
 						<span class="mtext-106 cl2">
-							<%=en.format(idDetailProduct.getPrice()) VNĐ %>
+							<%=en.format(idDetailProduct.getPrice()) %>VNĐ
 						</span>
 
 						<p class="stext-102 cl3 p-t-23">
@@ -340,7 +349,7 @@
 								
 
 									<a href="Cart?command=insertItem&product_id=<%=idDetailProduct.getIdProduct()%>" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">
-										Add to cart
+										<spring:message code="app.add.to.cart"/>
 									</a>
 								</div>
 							</div>	
