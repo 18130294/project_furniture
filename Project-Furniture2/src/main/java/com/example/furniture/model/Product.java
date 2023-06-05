@@ -1,5 +1,7 @@
 package com.example.furniture.model;
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -92,6 +94,15 @@ public class Product implements Comparable<Product> {
 	public int compareTo(Product o) {
 		return this.idProduct-o.idProduct;
 	}
+	public Product checkProduct(List<Product> list,int id ) {
+		for(Product pr:list) {
+		if(pr.getIdProduct()==id) {
+			return pr;
+		}
+			
+			}
+		return null;
 	
+}
 	
 }

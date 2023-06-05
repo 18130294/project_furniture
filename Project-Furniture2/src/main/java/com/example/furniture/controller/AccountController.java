@@ -67,7 +67,7 @@ public class AccountController {
 
 		}
 		else if(userAcc.getIsAdmin()==1) {
-			return new ModelAndView("redirect:/show_account_page", modelMap);
+			return new ModelAndView("redirect:/adminhome", modelMap);
 		}
 		else {
 			String rememberme = request.getParameter("rememberme");

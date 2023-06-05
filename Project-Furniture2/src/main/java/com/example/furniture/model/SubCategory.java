@@ -1,5 +1,7 @@
 package com.example.furniture.model;
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -46,6 +48,13 @@ public class SubCategory {
 					+ ", nameSubcategories=" + nameSubcategories + "]";
 		}
 		
+		public SubCategory checkSubCategory(List<SubCategory> listsc, String idSubCategories) {
+			for(SubCategory pr:listsc) {
+				if(pr.getNameSubcategories().equals(idSubCategories)) {
+					return pr;
+		}
 		
+			}
+			return null;}
 		
 }
